@@ -1,10 +1,19 @@
 import Foundation
 
-@objcMembers
 final class LoginViewModel: NSObject {
+
+    var onChange: (() -> Void)?
     
-    dynamic private(set) var isLoginAllowed: Bool = false
-    dynamic private(set) var errorMessage: String? = nil
+    private(set) var isLoginAllowed: Bool = false {
+        didSet {
+            onChange?()
+        }
+    }
+    private(set) var errorMessage: String? = nil {
+        didSet {
+            onChange?()
+        }
+    }
     
     private let model: LoginModel
     
